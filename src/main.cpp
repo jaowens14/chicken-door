@@ -69,6 +69,7 @@ volatile int heartLedDelay = 0;
 //====================================================
 bool doorFlag = false;
 volatile int doorDelay = 0;
+int indicator = 0;
 //====================================================
 // end door definitions
 //====================================================
@@ -234,7 +235,7 @@ void HeartLedMachine() {
     case LED_OFF:
       if (!heartLedDelay && !heartLedFlag) {
         //ledFlag = false;
-        heartLedDelay = 1;
+        heartLedDelay = indicator;
         HeartLedState = LED_ON;
         digitalWrite(HEART_LED, LOW);
       }
@@ -242,7 +243,7 @@ void HeartLedMachine() {
     case LED_ON:
       if (!heartLedDelay && !heartLedDelay) {
         //ledFlag
-        heartLedDelay = 1;
+        heartLedDelay = indicator;
         HeartLedState = LED_OFF;
         digitalWrite(HEART_LED, HIGH);
       }
@@ -354,6 +355,7 @@ void DoorMachine(void) {
         DoorState = IDLE;
         StepperState = CW;
         doorDelay = 15;
+        indicator = 8;
       }
     break;
 
@@ -364,6 +366,7 @@ void DoorMachine(void) {
         DoorState = IDLE;
         StepperState = CCW;
         doorDelay = 15;
+        indicator = 2;
       }
     break;
     case IDLE:
